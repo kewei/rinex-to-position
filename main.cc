@@ -1,35 +1,36 @@
 #include <iostream>
 #include <fstream>
-#include "pro_rinex.h"
+#include <string>
+//#include "read_obs_rinex.h"
+#include "read_obs_rinex.cc"
 
 
-void to_kml() 
-{
-	
-	return 0;
-}
-
-void main(int argc, char *argv[]) 
+int main(int argc, char *argv[]) 
 {
 	bool header = false;
-	if (arc > 2 or arc < 1)
+	std::string rinex_obs;
+	std::string rinex_nav;
+	if (argc > 2 || argc < 1)
 	{
 		std::cout << "It requires at least one parameter for observation file or at most two parameters for observation file and navigation file" << std::endl;
-		return 0;
 	}
-	else if (arc == 2)
+	else if (argc == 2)
 	{
-		Pro_rinex rinex_worker;
-    	rinex_worker.read_rinex_obs(argv[1], header);
-		rinex_worker.read_rinex_nav(argv[2]);	
+		ReadObsRinex rinex_worker;
+		rinex_obs = argv[1];
+		rinex_nav = argv[2];
+    	rinex_worker.read_rinex_obs(rinex_obs);
+		// rinex_worker.read_rinex_nav(rinex_nav);	
 	}
-	else if (arc == 1)
+	else if (argc == 1)
 	{
-		Pro_rinex rinex_worker;
-    	rinex_worker.read_rinex_obs(argv[1], header);
-    	rinex_worker.get_nav_ftp(header);
-	}	
-	
+		ReadObsRinex rinex_worker;
+		std::string d_t;
+		rinex_obs = argv[1];
+    	rinex_worker.read_rinex_obs(rinex_obs);
+    	// rinex_worker.get_nav_ftp(d_t);
+	}
+
 	return 0;
 }
 
