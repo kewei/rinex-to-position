@@ -2,3 +2,6 @@
 funs/.DS_Store
 include/.DS_Store
 .vscode/
+main.dSYM/
+main
+.*

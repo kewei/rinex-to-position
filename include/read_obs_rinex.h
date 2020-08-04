@@ -1,12 +1,15 @@
+#ifndef READ_OBS_RINEX_H
+#define READ_OBS_RINEX_H
+
 #include <string>
 #include <map>
 #include <vector>
+#include "obsData.h"
 
 class ReadObsRinex
 {
 	public:
-		void read_rinex_obs(std::string osb_file_name);
-		void read_rinex_nav(std::string nav_file_name);
-		void get_nav_ftp(std::string d_t);
+		ObsData read_rinex_obs(std::string osb_file_name);
 };
 
+#endif

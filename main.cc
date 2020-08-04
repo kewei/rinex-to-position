@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "/Users/keweizhang/Documents/rinex-to-position/include/read_obs_rinex.h"
-//#include "read_obs_rinex.cc"
+//#include "/Users/keweizhang/Documents/rinex-to-position/include/read_obs_rinex.h"
+#include "read_obs_rinex.h"
 
 
 int main(int argc, char *argv[]) 
