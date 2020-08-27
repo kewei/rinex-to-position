@@ -86,5 +86,6 @@ std::vector<long> date2GpsTime(int year, int month, int day, int hour, int minut
     int week = int(std::floor((num_days_until_last_year + days_current_year)/7));
     gpsTime.push_back(static_cast<long>(secGps));
     gpsTime.push_back(static_cast<long>(week));
+    gpsTime.push_back(static_cast<long>(days_current_year));
     return gpsTime;
 }

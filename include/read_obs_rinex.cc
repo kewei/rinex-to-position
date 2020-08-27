@@ -100,6 +100,7 @@ ObsData ReadObsRinex::read_rinex_obs(std::string obs_file_name)
 			}
 			if (line.find("TIME OF FIRST OBS") != -1)
 			{
+				std::vector<long> time_first_obs; // <secGps, week, DOY>
 				std::string::size_type sz;
 				rinex_obs_header.t_first_obs["year"] = std::to_string(std::stoi(line, &sz));
 				std::string t_d_rest = line.substr(sz);
@@ -113,6 +114,9 @@ ObsData ReadObsRinex::read_rinex_obs(std::string obs_file_name)
 				t_d_rest = t_d_rest.substr(sz);
 				rinex_obs_header.t_first_obs["sec"] = std::to_string(std::stof(t_d_rest, &sz));
 				t_d_rest = t_d_rest.substr(sz);
+				time_first_obs = date2GpsTime(rinex_obs_header.t_first_obs["year"], rinex_obs_header.t_first_obs["month"],\
+				rinex_obs_header.t_first_obs["day"], rinex_obs_header.t_first_obs["hour"], 0, 0);
+				rinex_obs_header.t_first_obs["DOY"] = time_first_obs[2];
 				ltrim(t_d_rest);
 				rinex_obs_header.t_first_obs["system"] = t_d_rest.substr(0, t_d_rest.find(" "));
 			}
@@ -135,7 +139,7 @@ ObsData ReadObsRinex::read_rinex_obs(std::string obs_file_name)
 			}
 			else
 			{
-				std::vector<long> gps_time; // <secGps, week>
+				std::vector<long> gps_time; // <secGps, week, DOY>
 				int num_sats;
 				if (line[0] == '>')
 				{
